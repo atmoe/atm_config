@@ -1,0 +1,22 @@
+# Tab Complete
+set autolist
+
+# Use vim terminal input
+bindkey -v
+
+###############################################################################
+# Alises section
+setenv CLICOLOR 
+setenv LSCOLORS Exfxcxdxbxegedabagacad
+
+alias ls   'ls -F --color'
+alias grep 'grep --color=always'
+alias rm   'rm -i'
+
+# less interprets color from piped commands
+alias less 'less -r'
+
+alias findit 'find . -name ".snapshot*" -prune -o -name "\!:1" -print'
+
+# Setup to use UTF so powerline looks nice
+alias tmux '/usr/bin/env LC_ALL=en_US.UTF-8 /home/atm/installs/bin/tmux'
