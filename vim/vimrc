@@ -1,0 +1,129 @@
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   set fileencodings=utf-8,latin1
+endif
+set encoding=utf-8
+
+set nocompatible         " Use Vim defaults (much better!)
+set bs=indent,eol,start  " allow backspacing over everything in insert mode
+set ai                   " always set autoindenting on
+set backup               " keep a backup file
+set backupdir=~/.vim_backups 
+set viminfo='20,\"50     " read/write a .viminfo file, don't store more
+                         " than 50 lines of registers
+set history=50           " keep 50 lines of command line history
+set ruler                " show the cursor position all the time
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+  augroup redhat
+    " In text files, always limit the width of text to 78 characters
+    autocmd BufRead *.txt set tw=78
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+  augroup END
+endif
+
+if has("cscope") && filereadable("/usr/bin/cscope")
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   set csverb
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  syntax sync fromstart
+  set hlsearch
+endif
+
+if &term=="xterm"
+     set t_Co=8
+     set t_Sb=[4%dm
+     set t_Sf=[3%dm
+endif
+
+
+colorscheme desert
+
+set incsearch    " Incremental search - search immediately
+
+set showcmd      " Show character/line counts in visual mode
+set nowrap       " no text wrapping
+set expandtab    " tab inserts spaces (use CTRL-V <Tab> for real TAB)
+set ts=4         " tab represents 4 spaces
+set sw=4         " columns of text for auto-indent
+
+" Set ruby system verilog files as system verilog syntax highlighting
+au BufNewFile,BufRead *.spds     set filetype=perl
+au BufNewFile,BufRead *.spds.erb set filetype=perl
+au BufNewFile,BufRead *.rsv      set filetype=verilog_systemverilog
+au BufNewFile,BufRead *.rsvh     set filetype=verilog_systemverilog
+au BufNewFile,BufRead *.psv      set filetype=verilog_systemverilog
+au BufNewFile,BufRead *.psvh     set filetype=verilog_systemverilog
+
+"This is for setting Makefiles with tabs not spaces
+autocmd FileType make setlocal noexpandtab
+
+" Set P4 Root correctly for perforce integration
+autocmd VimEnter * let g:p4ClientRoot=substitute(expand('%:p'), "Wtmp.*", "Wtmp", "")
+
+
+" text/comment formatting
+set formatoptions-=t " t - auto wrap text at textwidth
+set formatoptions-=c " c - auto wrap comments at textwidth
+set formatoptions-=r " r - automatic comment when you hit <Enter>
+set formatoptions-=o " o - automatic comment when you hit 'O'
+
+" Status Line Setup
+set laststatus=2 " use last two lines for statusline
+set statusline=%t                               "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}]                         "file format
+set statusline+=%h                              "help file flag
+set statusline+=%m                              "modified flag
+set statusline+=%r                              "read only flag
+set statusline+=%y                              "filetype
+set statusline+=%=                              "left/right separator
+set statusline+=%c,                             "cursor column
+set statusline+=%l/%L                           "cursor line/total lines
+set statusline+=\ %P                            "percent through file
+
+
+" Nerd Tree commands
+set <F10>=[21~
+noremap <F10> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrows=0
+
+
+"augroup CursorLine
+"  au!
+"  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"  au WinLeave * setlocal nocursorline
+"augroup END
+
+" Perforce integration setup
+if $GVIM_NO_PERFORCE == 1
+    let g:loaded_perforce = 1
+endif
+
+" decrease delay for escape detection (speeds up insert mode to command mode delay when hitting escape)
+set timeoutlen=1000 ttimeoutlen=0
+
+" Powerline
+"set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
