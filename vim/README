@@ -1,11 +1,8 @@
 To VIM working, we need to:
 
-Install these VIM plugins:
-1) Perforce    http://www.vim.org//script.php?script_id=240
-2) NerdTree    https://github.com/scrooloose/nerdtree    
+1) Install Vundle: git clone https://github.com/VundleVim/Vundle.vim 
+2) Run ":PluginInstall" in vim to load all other plugins
 
-Install these syntax files:
-1) verilog_systemverilog.vim    http://www.vim.org/scripts/script.php?script_id=1586
 
 Install these fonts (for GUI):
 1) Inconsolata\ for\ Powerline\ 11
