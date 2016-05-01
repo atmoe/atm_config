@@ -11,9 +11,9 @@ set histfile = ~/.tcsh_history # history file
 ###############################################################################
 # Alises section
 setenv CLICOLOR 
-setenv LSCOLORS Exfxcxdxbxegedabagacad
+setenv LSCOLORS Gxfxcxdxbxegedabagacad
 
-alias ls   'ls -F --color'
+alias ls   'ls -F'
 alias grep 'grep --color=always'
 alias rm   'rm -i'
 
