@@ -151,7 +151,11 @@ set statusline+=\ %P                            "percent through file
 " Nerd Tree commands
 set <F10>=[21~
 noremap <F10> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeGlyphReadOnly = 1
+
 
 " Perforce integration setup
 if $GVIM_NO_PERFORCE == 1

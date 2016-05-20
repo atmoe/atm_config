@@ -19,6 +19,7 @@ else
     alias ls   'ls -F --color'
 endif
 
+alias df   'df -h'
 alias grep 'grep --color=always'
 alias rm   'rm -i'
 
