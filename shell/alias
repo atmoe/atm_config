@@ -13,7 +13,13 @@ set histfile = ~/.tcsh_history # history file
 setenv CLICOLOR 
 setenv LSCOLORS Gxfxcxdxbxegedabagacad
 
-alias ls   'ls -F'
+if(`uname` == "Darwin") then
+    alias ls   'ls -F'
+else
+    alias ls   'ls -F --color'
+endif
+
+alias df   'df -h'
 alias grep 'grep --color=always'
 alias rm   'rm -i'
 
