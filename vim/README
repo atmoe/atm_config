@@ -1,8 +1,7 @@
-To VIM working, we need to:
+To get VIM working, we need to:
 
 1) Install Vundle: git clone https://github.com/VundleVim/Vundle.vim 
 2) Run ":PluginInstall" in vim to load all other plugins
-
 
 Install these fonts (for GUI):
 1) Inconsolata\ for\ Powerline\ 11
