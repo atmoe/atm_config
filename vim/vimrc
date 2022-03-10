@@ -113,19 +113,8 @@ set expandtab    " tab inserts spaces (use CTRL-V <Tab> for real TAB)
 set ts=4         " tab represents 4 spaces
 set sw=4         " columns of text for auto-indent
 
-" Set ruby system verilog files as system verilog syntax highlighting
-au BufNewFile,BufRead *.spds     set filetype=perl
-au BufNewFile,BufRead *.spds.erb set filetype=perl
-au BufNewFile,BufRead *.rsv      set filetype=verilog_systemverilog
-au BufNewFile,BufRead *.rsvh     set filetype=verilog_systemverilog
-au BufNewFile,BufRead *.psv      set filetype=verilog_systemverilog
-au BufNewFile,BufRead *.psvh     set filetype=verilog_systemverilog
-
 "This is for setting Makefiles with tabs not spaces
 autocmd FileType make setlocal noexpandtab
-
-" Set P4 Root correctly for perforce integration
-autocmd VimEnter * let g:p4ClientRoot=substitute(expand('%:p'), "Wtmp.*", "Wtmp", "")
 
 " text/comment formatting
 set formatoptions-=t " t - auto wrap text at textwidth
@@ -156,11 +145,6 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeGlyphReadOnly = 1
 
-
-" Perforce integration setup
-if $GVIM_NO_PERFORCE == 1
-    let g:loaded_perforce = 1
-endif
 
 " decrease delay for escape detection (speeds up insert mode to command mode delay when hitting escape)
 set timeoutlen=1000 ttimeoutlen=0
